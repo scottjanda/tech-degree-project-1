@@ -18,7 +18,7 @@ var quotes = [
 function getRandomQuote() {
   quoteIndex = Math.floor( Math.random() * quotes.length);
   return quoteIndex;
-};
+}
 
 //This funciton prints the random quote to the page with the included CSS styles
 function printQuote() {
@@ -26,12 +26,9 @@ function printQuote() {
   var displayQuote = quotes[quoteIndex].quote;
   var displaySource = quotes[quoteIndex].source;
   var message = '<p class="quote">'+[displayQuote]+'</p>';
-  message += '<p><span class="source">'+[displaySource]+'</span>';
-  document.write(message);
-
-  //Need to figure out how to correctly position the output.
-};
-
+  message += '<p><class="source">'+[displaySource]+'</p>';
+  document.getElementById('quote-box').innerHTML = message;
+}
 //This function produces a random background color
 function randomBackgroundColor () {
   var red = Math.floor(Math.random() * 256 );
@@ -41,15 +38,10 @@ function randomBackgroundColor () {
 }
 
 printQuote();
-
 randomBackgroundColor ();
-
-  document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-
-//Exceeds expectations requirement: quotes change automatically after 20 seconds
-setInterval("window.location.reload()", 20000);
+document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+//Exceeds expectations requirement: quotes change automatically after 30 seconds
+setInterval("window.location.reload()", 30000);
 
 //Original code and notes from the project start files follows:
 // event listener to respond to "Show another quote" button clicks

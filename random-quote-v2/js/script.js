@@ -1,4 +1,3 @@
-var quoteIndex
 //This is the array that hold the quotes to be used with the getRandomQuote function
 var quotes = [
   {
@@ -40,30 +39,28 @@ var quotes = [
 
 //This function returns a random quote from the quotes array
 function getRandomQuote() {
-  quoteIndex = Math.floor( Math.random() * quotes.length);
-  return quoteIndex;
+  var quoteIndex = Math.floor( Math.random() * quotes.length);
+  var quoteReturn = quotes[quoteIndex];
+  return quoteReturn;
+
 }
 
 //This funciton prints the random quote to the page with the specified CSS styles
 function printQuote() {
   getRandomQuote();
+  var citationPicked = getRandomQuote();
+  var message = '<p class="quote">'+citationPicked.quote+'</p>';
 
-  var displayQuote = quotes[quoteIndex].quote;
-  var displaySource = quotes[quoteIndex].source;
-  var displayYear = quotes[quoteIndex].year;
-  var displayCitation = quotes[quoteIndex].citation;
-  var message = '<p class="quote">'+displayQuote+'</p>';
-
-  message += '<p class="source">'+displaySource;
-  if (quotes[quoteIndex].citation !== undefined) {
-    message += "<span class = 'citation'>" + quotes[quoteIndex].citation + "</span>";
+  message += '<p class="source">'+citationPicked.source;
+  if (citationPicked.citation) {
+    message += "<span class = 'citation'>" + citationPicked.citation + "</span>";
   }
-  if (quotes[quoteIndex].year !== undefined) {
-    message += "<span class = 'year'>" + quotes[quoteIndex].year + "</span>";
+  if (citationPicked.year) {
+    message += "<span class = 'year'>" + citationPicked.year + "</span>";
   }
   //Code to display tags with each quote
-  if (quotes[quoteIndex].tags !== undefined) {
-    message += "<p>Tags: " + quotes[quoteIndex].tags + "</p>";
+  if (citationPicked.tags) {
+    message += "<p>Tags: " + citationPicked.tags + "</p>";
   }
 
   message += '</p>';
@@ -84,4 +81,4 @@ printQuote();
 // when user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
 //This causes the quote to change automatically after 30 seconds
-setInterval("window.location.reload()", 30000);
+setInterval(printQuote, 30000);
